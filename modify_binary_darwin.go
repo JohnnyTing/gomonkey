@@ -13,7 +13,12 @@ func PtrOf(val []byte) uintptr {
 
 func modifyBinary(target uintptr, bytes []byte) {
 	targetPage := pageStart(target)
-	res := write(target, PtrOf(bytes), len(bytes), targetPage, syscall.Getpagesize(), syscall.PROT_READ|syscall.PROT_EXEC)
+	endPage := pageStart(target + uintptr(len(bytes)) - 1)
+	protectSize := syscall.Getpagesize()
+	if endPage > targetPage {
+		protectSize = int(endPage-targetPage) + syscall.Getpagesize()
+	}
+	res := write(target, PtrOf(bytes), len(bytes), targetPage, protectSize, syscall.PROT_READ|syscall.PROT_EXEC)
 	if res != 0 {
 		panic(fmt.Errorf("failed to write memory, code %v", res))
 	}
