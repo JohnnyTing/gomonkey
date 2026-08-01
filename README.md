@@ -38,9 +38,9 @@ gomonkey is a library to make monkey patching in unit tests easy, and the core i
 ```go
 $ go get github.com/agiledragon/gomonkey@v2.0.2
 ```
-- v2.1.0 and above, for example v2.11.0
+- v2.1.0 and above, for example v2.14.3
 ```go
-$ go get github.com/agiledragon/gomonkey/v2@v2.11.0
+$ go get github.com/JohnnyTing/gomonkey/v2@v2.14.3
 ```
 
 ## Test Method
@@ -51,4 +51,3 @@ $ go test . ./test -gcflags=all=-l
 ## Using gomonkey
 
 Please refer to the test cases as idioms, very complete and detailed.
-
